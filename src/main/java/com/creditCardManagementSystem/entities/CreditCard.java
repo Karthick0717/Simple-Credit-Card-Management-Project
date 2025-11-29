@@ -1,11 +1,17 @@
 package com.creditCardManagementSystem.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class CreditCard {
@@ -13,7 +19,10 @@ public class CreditCard {
 	@Id
 	private int creditCardId;
 	
-	private Customer customer;
+	@ManyToOne
+	@JoinColumn (name= "customer_id",nullable = false)
+	@JsonBackReference (value = "customer-creditcard")
+	private Customer customer;  // 
 	
 	private double creditLimit;
 	
@@ -25,8 +34,25 @@ public class CreditCard {
 	
 	private LocalDateTime createdAt;
 
+	@OneToMany (mappedBy = "creditCard")
+	@JsonManagedReference  (value = "creditcard-cardtransaction")
+	private List<CardTransaction> listOfCardTransactions;
+	
+	@OneToMany (mappedBy = "creditCard")
+	@JsonManagedReference(value = "creditcard-payments")
+	private List<Payment> listOfPayments;
+	
+	@OneToMany (mappedBy = "creditCard")
+	@JsonManagedReference (value = "creditcard-bill")
+	private List<Bill> listOfBills;
+
+	public CreditCard() {
+		super();
+	}
+
 	public CreditCard(int creditCardId, Customer customer, double creditLimit, double availableLimit, String cardNumber,
-			double interestRate, LocalDateTime createdAt) {
+			double interestRate, LocalDateTime createdAt, List<CardTransaction> listOfCardTransactions,
+			List<Payment> listOfPayments) {
 		super();
 		this.creditCardId = creditCardId;
 		this.customer = customer;
@@ -35,10 +61,8 @@ public class CreditCard {
 		this.cardNumber = cardNumber;
 		this.interestRate = interestRate;
 		this.createdAt = createdAt;
-	}
-
-	public CreditCard() {
-		super();
+		this.listOfCardTransactions = listOfCardTransactions;
+		this.listOfPayments = listOfPayments;
 	}
 
 	public int getCreditCardId() {
@@ -95,6 +119,22 @@ public class CreditCard {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public List<CardTransaction> getListOfCardTransactions() {
+		return listOfCardTransactions;
+	}
+
+	public void setListOfCardTransactions(List<CardTransaction> listOfCardTransactions) {
+		this.listOfCardTransactions = listOfCardTransactions;
+	}
+
+	public List<Payment> getListOfPayments() {
+		return listOfPayments;
+	}
+
+	public void setListOfPayments(List<Payment> listOfPayments) {
+		this.listOfPayments = listOfPayments;
 	}
 
 }

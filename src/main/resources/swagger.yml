@@ -1,0 +1,30 @@
+openapi: 3.0.0
+info:
+ title: Documentation for Credit Card Management Application
+ version: 1.0.0
+ description: A simple springboot project on CreditCard Management Application
+ 
+paths:
+
+ /api/customer/:
+  post: 
+    summary: Add a new customer
+    description: Creates a new customer
+    responses:
+     "201":
+     description: "Customer created successfully"
+ /v1/cards/transactions/{custId}:
+  get:
+   summary: Gets Customer full details
+   parameters:
+    in: path
+    name: custId
+    required: true
+    schema:
+     type:integer
+    description: Customer ID
+  responses: 
+   "302":
+    description: "Customer details found" 
+     
+    

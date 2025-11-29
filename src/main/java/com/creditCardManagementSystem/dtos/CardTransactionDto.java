@@ -1,7 +1,5 @@
 package com.creditCardManagementSystem.dtos;
 
-import com.creditCardManagementSystem.entities.CreditCard;
-import com.creditCardManagementSystem.entities.Customer;
 import com.creditCardManagementSystem.enums.TransactionType;
 
 import jakarta.validation.constraints.NotNull;
@@ -12,10 +10,10 @@ public class CardTransactionDto {
     private int transactionId;
    	
 	
-	private Customer customer;
+	private CustomerDto customerDto;
 	
 	
-	private CreditCard creditCard;
+	private CreditCardDto creditCardDto;
 	
 	@NotNull (message = "merchant name should not be null")
 	private String merchantName;
@@ -23,73 +21,72 @@ public class CardTransactionDto {
 	
 	private TransactionType type;
 
+    private double amount;
 
 	public CardTransactionDto() {
 		super();
 	}
 
-
-	public CardTransactionDto(int transactionId, Customer customer, CreditCard creditCard, String merchantName,
-			TransactionType type) {
+	public CardTransactionDto(@NotNull(message = " transactionId should not be null") int transactionId,
+			CustomerDto customerDto, CreditCardDto creditCardDto,
+			@NotNull(message = "merchant name should not be null") String merchantName, TransactionType type,
+			double amount) {
 		super();
 		this.transactionId = transactionId;
-		this.customer = customer;
-		this.creditCard = creditCard;
+		this.customerDto = customerDto;
+		this.creditCardDto = creditCardDto;
 		this.merchantName = merchantName;
 		this.type = type;
+		this.amount = amount;
 	}
-
 
 	public int getTransactionId() {
 		return transactionId;
 	}
 
-
 	public void setTransactionId(int transactionId) {
 		this.transactionId = transactionId;
 	}
 
-
-	public Customer getCustomer() {
-		return customer;
+	public CustomerDto getCustomerDto() {
+		return customerDto;
 	}
 
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerDto(CustomerDto customerDto) {
+		this.customerDto = customerDto;
 	}
 
-
-	public CreditCard getCreditCard() {
-		return creditCard;
+	public CreditCardDto getCreditCardDto() {
+		return creditCardDto;
 	}
 
-
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
+	public void setCreditCardDto(CreditCardDto creditCardDto) {
+		this.creditCardDto = creditCardDto;
 	}
-
 
 	public String getMerchantName() {
 		return merchantName;
 	}
 
-
 	public void setMerchantName(String merchantName) {
 		this.merchantName = merchantName;
 	}
-
 
 	public TransactionType getType() {
 		return type;
 	}
 
-
 	public void setType(TransactionType type) {
 		this.type = type;
 	}
-	
-	
-	
-	
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+    
 }
+	

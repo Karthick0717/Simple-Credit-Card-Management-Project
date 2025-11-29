@@ -1,8 +1,12 @@
 package com.creditCardManagementSystem.mappers;
 
+import org.springframework.stereotype.Component;
+
 import com.creditCardManagementSystem.dtos.CustomerDto;
 import com.creditCardManagementSystem.entities.Customer;
 
+
+@Component
 public class CustomerMapper {
 	
 	public CustomerDto toCustomerDto(Customer cus) {

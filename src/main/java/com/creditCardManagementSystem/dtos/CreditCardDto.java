@@ -3,12 +3,14 @@ package com.creditCardManagementSystem.dtos;
 import java.time.LocalDateTime;
 
 import com.creditCardManagementSystem.entities.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CreditCardDto {
 
     private int creditCardId;
 	
-	private Customer customer;
+    @JsonIgnore
+	private CustomerDto customerDto;
 	
 	private double creditLimit;
 	
@@ -24,11 +26,11 @@ public class CreditCardDto {
 		super();
 	}
 
-	public CreditCardDto(int creditCardId, Customer customer, double creditLimit, double availableLimit,
+	public CreditCardDto(int creditCardId, CustomerDto customerDto, double creditLimit, double availableLimit,
 			String cardNumber, double interestRate, LocalDateTime createdAt) {
 		super();
 		this.creditCardId = creditCardId;
-		this.customer = customer;
+		this.customerDto = customerDto;
 		this.creditLimit = creditLimit;
 		this.availableLimit = availableLimit;
 		this.cardNumber = cardNumber;
@@ -44,12 +46,12 @@ public class CreditCardDto {
 		this.creditCardId = creditCardId;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public CustomerDto getCustomerDto() {
+		return customerDto;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerDto(CustomerDto customerDto) {
+		this.customerDto = customerDto;
 	}
 
 	public double getCreditLimit() {
@@ -91,6 +93,5 @@ public class CreditCardDto {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-	
 	
 }
